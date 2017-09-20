@@ -246,11 +246,11 @@ var Grid = createReactClass({
     return (
       <div className="container text-center">
         <h1 id="header">Game of Life</h1>
+        <Generation ref="generation" />
         <div id="grid" style={gridStyle}>
           {cells}
         </div>
         <Buttons ref="buttons" pause={this.pause} reset={this.reset} clear={this.clearBoard} />
-        <Generation ref="generation" />
       </div>
     );
   }

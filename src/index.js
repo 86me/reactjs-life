@@ -5,5 +5,5 @@ import './App.css';
 import Grid from './App';
 //import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Grid />, document.getElementById('main'));
+ReactDOM.render(<Grid />, document.getElementById('root'));
 //registerServiceWorker();
