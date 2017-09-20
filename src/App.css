@@ -1,0 +1,75 @@
+body {
+  background:#eee;
+  color:#141414;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+.btn-warning {
+  background: grey;
+  color: #ffffff;
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning {
+  background: lightgrey;
+}
+.btn-warning:active, .btn-warning.active {
+  background: darkgrey;
+  box-shadow: none;
+}
+
+.btn.sharp {
+  border-radius: 0;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+  padding: 2px 6px;
+}
+.btn-sm, .btn-group-sm > .btn {
+  padding: 8px 12px;
+}
+.btn-lg {
+  padding: 20px 40px;
+  border-radius: 4px;
+}
+.btn-xs.btn-default, .btn-xs.outline {
+  padding: 0px 4px;
+}
+.btn-sm.btn-default, .btn-sm.outline {
+  padding: 6px 10px;
+}
+.btn-lg.btn-default, .btn-lg.outline {
+  padding: 18px 38px;
+}
+
+h1 {
+  font-size:46px;
+  font-weight:100;
+  letter-spacing:4px;
+  font-family:'Roboto';
+  margin-top:30px;
+  text-align:center;
+}
+
+#grid {
+  background:#fafafa;
+  margin:0 auto;
+  margin-top:30;
+  -webkit-box-shadow:0 0 5px rgba(0, 0, 0, 1);
+  -moz-box-shadow:0 0 5px rgba(0, 0, 0, 1);
+  box-shadow:0 0 5px rgba(0, 0, 0, 1);
+}
+
+#generation {
+  color:black;
+  text-transform:uppercase;
+  text-align:center;
+}
