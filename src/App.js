@@ -1,7 +1,8 @@
-//import React, { Component } from 'react';
-import React from 'react';
+import React, {Component} from 'react';
 import Reflux from 'reflux';
+import InputRange from 'react-input-range';
 import './App.css';
+import 'react-input-range/lib/css/index.css';
 var createReactClass = require('create-react-class');
 
 var Actions = Reflux.createActions([
@@ -18,29 +19,29 @@ var CellStore = Reflux.createStore({
   }
 });
 
+class Cell extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAlive: null
+    };
 
-var Cell = createReactClass({
-  getInitialState: function() {
-    return { isAlive: null };
-  },
+    this.onClick = this.onClick.bind(this);
+  }
 
-  componentWillMount: function() {
-    this.setState({ isAlive: this.props.isAlive });
-  },
-
-  onClick: function() {
+  onClick() {
     Actions.updateCellStatus(this.props.row, this.props.col);
     this.setState({ isAlive: !this.state.isAlive });
-  },
+  }
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({ isAlive: nextProps.isAlive });
-  },
+  }
 
-  render: function() {
+  render() {
     var cellStyle = {
-      width: 12,
-      height: 12,
+      width: 9,
+      height: 9,
       dislay: "inline-block",
       float: "left",
       border: "1px solid #000",
@@ -51,15 +52,17 @@ var Cell = createReactClass({
       <div onClick={this.onClick} style={cellStyle}></div>
     );
   }
-})
+}
 
+class Buttons extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Pause"
+    };
+  }
 
-var Buttons = createReactClass({
-  getInitialState: function() {
-    return { text: "Pause" };
-  },
-
-  render: function() {
+  render() {
     var margin = { margin: "10px 5px", textAlign: "center" };
 
     return (
@@ -70,20 +73,52 @@ var Buttons = createReactClass({
       </div>
     );
   }
-});
+}
 
+class Slider extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      delay: 1
+    };
+  }
 
-var Generation = createReactClass({
-  getInitialState: function() {
-    return { generation: 0 };
-  },
+  handleChange(delay) {
+    console.log(delay);
+  }
 
-  render: function() {
+  render() {
+    return (
+      <form className="form">
+      <span className="delay">Delay</span>
+      <InputRange 
+        id="slider"
+        formatLabel={value => `${value}ms`}
+        minValue={1} 
+        maxValue={1024} 
+        value={this.state.delay}
+        onChange={delay => this.setState({delay})}
+        onChangeComplete={delay => this.handleChange(delay)}
+        /*onChangeComplete={delay => console.log(this)}*//>
+      </form>
+    );
+  }
+}
+
+class Generation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      generation: 0
+    };
+  }
+
+  render() {
     return (
       <h4 id="generation">Generation: {this.state.generation}</h4>
     );
   }
-});
+}
 
 
 var Grid = createReactClass({
@@ -91,7 +126,7 @@ var Grid = createReactClass({
 
   getInitialState: function() {
     return {
-      size: 40,
+      size: 60,
       grid: [],
       neighborCells: [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     };
@@ -220,17 +255,24 @@ var Grid = createReactClass({
   },
 
   renderGrid: function() {
+    var delay;
+    if(!this.refs.slider) {
+      var slider = new Slider()
+      delay = slider.state.delay;
+    } else {
+      delay = this.refs.slider.state.delay;
+    }
     this.interval = setInterval(function() {
       this.updateAllCells();
       this.updateGeneration();
       this.forceUpdate();
-    }.bind(this), 1);
+    }.bind(this), delay);
   },
 
   render: function() {
     var gridStyle = {
-      width: this.state.size * 14,
-      height: this.state.size * 14,
+      width: this.state.size * 11,
+      height: this.state.size * 11,
     };
 
     var cells = [];
@@ -250,6 +292,7 @@ var Grid = createReactClass({
         <div id="grid" style={gridStyle}>
           {cells}
         </div>
+        <Slider ref="slider" delay={this.value}/>
         <Buttons ref="buttons" pause={this.pause} reset={this.reset} clear={this.clearBoard} />
       </div>
     );

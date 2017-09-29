@@ -92,3 +92,15 @@ h1 {
 #site-link:active {
   color:transparent;
 }
+
+.delay {
+  padding-left:50%;
+  position:relative;
+  top:33px;
+  left:-22px;
+}
+
+.form {
+    width:400px;
+    margin:1em auto;
+}
