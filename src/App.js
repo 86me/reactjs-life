@@ -79,7 +79,7 @@ class Slider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delay: 1
+      delay: 240
     };
   }
 
@@ -126,7 +126,7 @@ var Grid = createReactClass({
 
   getInitialState: function() {
     return {
-      size: 60,
+      size: 136,
       grid: [],
       neighborCells: [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     };
