@@ -40,8 +40,8 @@ class Cell extends Component {
 
   render() {
     var cellStyle = {
-      width: 9,
-      height: 9,
+      width: 4,
+      height: 4,
       dislay: "inline-block",
       float: "left",
       border: "1px solid #000",
@@ -124,8 +124,20 @@ class Generation extends Component {
 var Grid = createReactClass({
   mixins: [Reflux.listenTo(CellStore, "onCellClick")],
 
+    getGridSize: function(url = new URL(document.location)) {
+  fetch(url).then(function(response) {
+    return response.searchParams;
+  }).then(function(data) {
+    console.log(data);
+    alert(data);
+  }).catch(function() {
+    console.log("Booo");
+  })
+},
+
   getInitialState: function() {
     return {
+      smallSize: 98,
       size: 136,
       grid: [],
       neighborCells: [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
@@ -192,7 +204,7 @@ var Grid = createReactClass({
     }
 
     this.refs.generation.setState({ generation: 0 });
-    this.refs.buttons.setState({ text: "Start" });
+    this.refs.buttons.setState({ text: "Pause" });
     this.forceUpdate();
   },
 
@@ -271,8 +283,8 @@ var Grid = createReactClass({
 
   render: function() {
     var gridStyle = {
-      width: this.state.size * 11,
-      height: this.state.size * 11,
+      width: this.state.size * 6,
+      height: this.state.size * 6,
     };
 
     var cells = [];
