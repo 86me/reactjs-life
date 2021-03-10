@@ -1,6 +1,12 @@
+@font-face {
+    font-family:PS2P;
+    src: url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+}
+
 body {
   background:#222;
   color:#141414;
+  font-family:PS2P;
 }
 
 .btn {

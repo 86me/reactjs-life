@@ -79,23 +79,23 @@ class Slider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delay: 240
+      delay: 2048
     };
   }
 
   handleChange(delay) {
-    console.log(delay);
+    //console.log(delay);
   }
 
   render() {
     return (
       <form className="form">
       <span className="delay">Delay</span>
-      <InputRange 
+      <InputRange
         id="slider"
         formatLabel={value => `${value}ms`}
-        minValue={1} 
-        maxValue={1024} 
+        minValue={1}
+        maxValue={2048}
         value={this.state.delay}
         onChange={delay => this.setState({delay})}
         onChangeComplete={delay => this.handleChange(delay)}
@@ -123,22 +123,24 @@ class Generation extends Component {
 
 var Grid = createReactClass({
   mixins: [Reflux.listenTo(CellStore, "onCellClick")],
-
     getGridSize: function(url = new URL(document.location)) {
-  fetch(url).then(function(response) {
-    return response.searchParams;
-  }).then(function(data) {
-    console.log(data);
-    alert(data);
-  }).catch(function() {
-    console.log("Booo");
+      fetch(url).then(function(response) {
+        return response.searchParams;
+      }).then(function(data) {
+          console.log(data);
+          alert(data);
+      }).catch(function() {
   })
 },
 
   getInitialState: function() {
     return {
+      /*
       smallSize: 98,
       size: 136,
+      */
+      smallSize: 49,
+      size: 67,
       grid: [],
       neighborCells: [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     };
