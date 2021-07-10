@@ -79,7 +79,7 @@ class Slider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delay: 2048
+      delay: 1024
     };
   }
 
@@ -94,7 +94,7 @@ class Slider extends Component {
       <InputRange
         id="slider"
         formatLabel={value => `${value}ms`}
-        minValue={1}
+        minValue={24}
         maxValue={2048}
         value={this.state.delay}
         onChange={delay => this.setState({delay})}
@@ -127,22 +127,31 @@ var Grid = createReactClass({
       fetch(url).then(function(response) {
         return response.searchParams;
       }).then(function(data) {
-          console.log(data);
-          alert(data);
+          //console.log(data);
+          //alert(data);
       }).catch(function() {
   })
 },
 
   getInitialState: function() {
     return {
-      /*
       smallSize: 98,
       size: 136,
-      */
+      /*
       smallSize: 49,
-      size: 67,
+      size: 68,
+      */
       grid: [],
-      neighborCells: [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
+      neighborCells: [
+        [-1, 0], 
+        [-1, 1], 
+        [0, 1], 
+        [1, 1], 
+        [1, 0], 
+        [1, -1], 
+        [0, -1], 
+        [-1, -1]
+      ]
     };
   },
 
@@ -285,8 +294,8 @@ var Grid = createReactClass({
 
   render: function() {
     var gridStyle = {
-      width: this.state.size * 6,
-      height: this.state.size * 6,
+      width: this.state.size * 4,
+      height: this.state.size * 4,
     };
 
     var cells = [];
